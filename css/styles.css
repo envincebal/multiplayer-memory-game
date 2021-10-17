@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fcfcfc;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
+svg {}
+
+svg path {
+  fill: #152938;
+}
+
+.game-container {
+  max-width: 1110px;
+  margin: 0 auto;
+}
+
+.btn {
+  border-style: none;
+  padding: 15px 0;
+  color: #FCFCFC;
+  border-radius: 35px;
+  font-weight: 700;
+  font-size: 26px;
+  cursor: pointer;
+  background-color: #BCCED9;
+}
+
+/* Start Screen */
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-container {
+  width: 85%;
+  background-color: #FCFCFC;
+  padding: 50px;
+  max-width: 645px;
+  border-radius: 20px;
+}
+
+.selection-box h3 {
+  color: #7191A5;
+  margin-bottom: 15px;
+}
+
+.selection-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 25px 0;
+}
+
+.btn-theme {
+  width: 47%;
+}
+
+.btn-players {
+  width: 22%;
+}
+
+.btn-grid {
+  width: 47%;
+}
+
+.btn-mode:hover {
+  background: #6395B8;
+}
+
+.btn-start {
+  width: 100%;
+  background: #FDA214;
+  font-size: 32px;
+}
+
+.btn-start:hover {
+  background: #FFB84A;
+}
+
+.active,
+.active:hover {
+  background: #304859;
+}
+
+/* Menu */
+
+.menu-container {
+  padding: 70px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-buttons .btn {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.restart-btn {
+  width: 127px;
+  background: #FDA214;
+}
+
+.restart-btn:hover {
+  background: #FFB84A;
+}
+
+.new-game-btn {
+  width: 149px;
+  color: #304859;
+  background: #DFE7EC;
+
+}
+
+.new-game-btn:hover {
+  background: #6395B8;
+  color: #fcfcfc;
+
+}
