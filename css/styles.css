@@ -126,3 +126,72 @@ svg path {
   color: #fcfcfc;
 
 }
+
+/* Game Grid */
+
+.game-grid {
+  max-width: 572px;
+  margin: 0 auto;
+}
+
+.grid {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card button {
+  border-style: none;
+  width: 82px;
+  height: 82px;
+  background: #304859;
+  border-radius: 100%;
+  align-items: center;
+  margin: 6px
+}
+
+i {
+  font-size: 40px;
+  color: #fcfcfc;
+}
+
+/* Players Score */
+
+.players-score{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 50px 0;
+}
+
+.player{
+  width: 20%;
+  background: #DFE7EC;
+  color: #304859;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  justify-content:space-between;
+  padding:  10px 15px;
+  align-items: center;
+}
+
+.score, .moves, .timer{
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.player-turn{
+  background: #FDA214;
+  color: #fcfcfc;
+}
+
+.single-player{
+  margin: 50px 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.time-div,
+.moves-div{
+  width: 35%;
+}
