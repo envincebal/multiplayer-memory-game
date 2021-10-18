@@ -7,15 +7,10 @@
 }
 
 body {
-  background-color: #fcfcfc;
+  background-color: #152938;
   font-family: 'Atkinson Hyperlegible', sans-serif;
 }
 
-svg {}
-
-svg path {
-  fill: #152938;
-}
 
 .game-container {
   max-width: 1110px;
@@ -34,11 +29,21 @@ svg path {
 }
 
 /* Start Screen */
+
 .start-screen {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 80px 0 0 0;
+}
+
+.logo-img {
+  margin: 0 0 40px 0;
+}
+
+.logo-img path {
+  fill: #FCFCFC;
 }
 
 .start-container {
@@ -86,8 +91,13 @@ svg path {
   background: #FFB84A;
 }
 
-.active,
-.active:hover {
+.theme-active,
+.players-active,
+.grid-active,
+.theme-active:hover,
+.players-active:hover,
+.grid-active:hover
+  {
   background: #304859;
 }
 
@@ -138,60 +148,84 @@ svg path {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .card button {
+  cursor: pointer;
   border-style: none;
   width: 82px;
   height: 82px;
   background: #304859;
   border-radius: 100%;
   align-items: center;
-  margin: 6px
+  margin: 6px;
+  font-size: 36px;
+  font-weight: 700;
+  color: #fcfcfc;
+} 
+
+.open {
+  background: #BCCED9;
+  cursor: default;
 }
 
-i {
+.show {
   font-size: 40px;
-  color: #fcfcfc;
+}
+
+.wrong {
+  background: #ed4444;
+}
+
+.match {
+  background: #FDA214;
+
+}
+
+.hard-card {
+  display: none;
 }
 
 /* Players Score */
 
-.players-score{
+.players-score {
   display: flex;
   justify-content: space-evenly;
   margin: 50px 0;
 }
 
-.player{
+.player {
   width: 20%;
   background: #DFE7EC;
   color: #304859;
   border-radius: 5px;
   text-align: center;
   display: flex;
-  justify-content:space-between;
-  padding:  10px 15px;
+  justify-content: space-between;
+  padding: 10px 15px;
   align-items: center;
 }
 
-.score, .moves, .timer{
+.score,
+.moves,
+.timer {
   font-weight: 700;
   font-size: 32px;
 }
 
-.player-turn{
+.player-turn {
   background: #FDA214;
   color: #fcfcfc;
 }
 
-.single-player{
+.single-player {
   margin: 50px 0;
   display: flex;
   justify-content: space-around;
 }
 
 .time-div,
-.moves-div{
+.moves-div {
   width: 35%;
 }
