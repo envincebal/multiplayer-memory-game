@@ -41,9 +41,9 @@ export const activeGame = `<div class="game-container">
 
   <!-- Solo game time and moves counter start -->
   <div class="single-player">
-    <div class="player time-div">
+    <div class=" player timer">
       <h3>Time</h3>
-      <p class="timer">1:34</p>
+      <span class="minutes">0</span>:<span class="seconds">00</span>
     </div>
     <div class="player moves-div">
       <h3>Moves</h3>
@@ -62,4 +62,6 @@ export const activeGame = `<div class="game-container">
 
 <!-- Game board end -->
 
-</div>`
+</div>`;
+
+

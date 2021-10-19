@@ -8,17 +8,40 @@ import {
   iconsArray,
   numArray
 } from "./themeArrays.js";
+let minutes;
+let seconds;
+let timer; // Serves as reference for time interval.
 
-console.log(typeof iconsArray[0]);
 const random = shuffle(iconsArray); // Stores shuffle function with array of card as argument.
 init();
 
 
+function startTimer() {
+  let mins = minutes.textContent; // Minutes counter.
+  let secs = 0; // Seconds counter.
+
+
+  /* Sets the game time countdown */
+  timer = setInterval(function () {
+    if (secs === 59) {
+      secs = "0" + 0;
+      seconds.textContent = secs;
+    } else {
+      secs++;
+      seconds.textContent = (secs < 10) ? "0" + secs : secs;
+    }
+
+    if (secs === "0" + 0) {
+      mins++;
+      minutes.textContent = mins;
+    }
+
+  }, 1000);
+
+}
+
 
 function init() {
-
-
- 
   document.querySelector("body").innerHTML = startMenu;
   menu();
 }
@@ -57,11 +80,11 @@ function menu() {
   startGame.addEventListener("click", () => {
     const startScreen = document.querySelector(".start-screen");
 
-    startScreen.style.display = "none";
-    
+    startScreen.style.display = "hidden";
+
     document.querySelector("body").innerHTML = activeGame;
     document.querySelector("body").style.backgroundColor = "#FCFCFC";
- 
+
 
 
     random.forEach((num, i) => {
@@ -73,23 +96,15 @@ function menu() {
       listItem.appendChild(button);
       const btn = document.getElementsByClassName("card-button");
 
-
-
       grid.appendChild(listItem);
       btn[i].innerHTML = num;
-      console.log(btn[i]);
-    })
+      minutes = document.querySelector(".minutes")
+      seconds = document.querySelector(".seconds")
+    });
+    startTimer()
   });
 
 }
-
-
-
-
-
-
-
-
 
 function shuffle(array) {
   let currentIndex = array.length;
