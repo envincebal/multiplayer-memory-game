@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #152938;
+
   font-family: 'Atkinson Hyperlegible', sans-serif;
 }
 
@@ -15,6 +15,7 @@ body {
 .game-container {
   max-width: 1110px;
   margin: 0 auto;
+  background-color: #FCFCFC;
 }
 
 .btn {
@@ -31,11 +32,13 @@ body {
 /* Start Screen */
 
 .start-screen {
+  height: 100vh;
+  background-color: #152938;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 80px 0 0 0;
+
 }
 
 .logo-img {
@@ -96,8 +99,7 @@ body {
 .grid-active,
 .theme-active:hover,
 .players-active:hover,
-.grid-active:hover
-  {
+.grid-active:hover {
   background: #304859;
 }
 
@@ -163,7 +165,7 @@ body {
   font-size: 36px;
   font-weight: 700;
   color: #fcfcfc;
-} 
+}
 
 .open {
   background: #BCCED9;
@@ -183,7 +185,7 @@ body {
 
 }
 
-.fa{
+.fa {
   font-size: 36px;
 }
 
@@ -219,7 +221,7 @@ body {
   color: #fcfcfc;
 }
 
-.single-player {
+.players-list {
   margin: 50px 0;
   display: flex;
   justify-content: space-around;
@@ -227,5 +229,9 @@ body {
 
 .time-div,
 .moves-div {
-  width: 35%;
+  width: 22%;
+}
+
+.time-div{
+  display: flex;
 }
