@@ -1,12 +1,8 @@
 import {
   iconsArray,
-  numArray,
-  playersArray
+  numArray
 } from "./themeArrays.js";
-const minutes = document.querySelector(".minutes");
-const seconds = document.querySelector(".seconds");
-let timer; // Serves as reference for time interval.
-const cardButton = document.querySelectorAll(".card-button");
+
 const theme = localStorage.getItem("theme");
 const players = localStorage.getItem("players");
 const grid = localStorage.getItem("grid");
@@ -15,13 +11,13 @@ let numMode = grid === "4x4" ? numArray.slice(0, 16) : numArray;
 let iconsMode = grid === "4x4" ? iconsArray.slice(0, 16) : iconsArray;
 let themeSetting = theme === "icons" ? iconsMode : numMode;
 const random = shuffle(themeSetting); // Stores shuffle function with array of card as argument.
+const cardButton = document.querySelectorAll(".card-button");
+let turn = [];
 
 init();
 
 function init() {
   const card = document.querySelectorAll(".card");
-  const player = document.querySelectorAll(".player");
-
 
   if (themeSetting === "numbers") {
     cardButton.forEach((num, i) => {
@@ -37,8 +33,6 @@ function init() {
     addPlayer([i]);
   }
 
-
-
   if (grid === "4x4") {
     Array.from(card).forEach(item => {
       if (item.classList.contains("hard-card")) {
@@ -51,7 +45,60 @@ function init() {
       item.style.height = "118px";
     });
   }
+
+  Array.from(cardButton).forEach(el => {
+    el.addEventListener("click", cardEventListener);
+  });
 }
+
+function cardEventListener(e) {
+  
+  if (!e.target.classList.contains("show")) {
+    e.target.classList.add("open", "show");
+    turn.push(e.target.children);
+  }
+
+  cardButton.forEach(btn => {
+    if (btn.classList.contains("open")) {
+      btn.removeEventListener("click", cardEventListener);
+    }
+  });
+console.log(turn[0][0])
+  if (turn.length === 2) {
+    let turn1 = turn[0][0];
+    let turn2 = turn[1][0];
+    if (turn1.classList.value !== turn2.classList.value) {
+
+      turn1.parentElement.classList.add("wrong");
+      turn2.parentElement.classList.add("wrong");
+
+      cardButton.forEach(btn => {
+        btn.removeEventListener("click", cardEventListener);
+      });
+
+      setTimeout(() => {
+        turn1.parentElement.classList.remove("open", "show", "wrong");
+        turn2.parentElement.classList.remove("open", "show", "wrong");
+
+        turn = [];
+
+        cardButton.forEach(btn => {
+          if (!btn.classList.contains("match")) {
+            btn.addEventListener("click", cardEventListener);
+          }
+        })
+      }, 1000);
+    } else {
+      /* If pair of card DO match, the 'match' style is applied to both. */
+      turn1.parentElement.classList.add("match");
+      turn2.parentElement.classList.add("match");
+
+      turn = []; // 'Turn' array is emptied when a pair of card are revealed.
+    }
+  }
+}
+
+
 
 function addPlayer(num) {
   const timer = document.querySelector(".time-div");
@@ -71,8 +118,9 @@ function addPlayer(num) {
 
   if (players > 1) {
     timer.style.display = "none";
+  } else {
+    startTimer();
   }
-
 }
 
 function shuffle(array) {
@@ -93,11 +141,13 @@ function shuffle(array) {
 
 
 function startTimer() {
+  const minutes = document.querySelector(".minutes");
+  const seconds = document.querySelector(".seconds");
   let mins = minutes.textContent; // Minutes counter.
   let secs = 0; // Seconds counter.
 
   /* Sets the game time countdown */
-  timer = setInterval(function () {
+  setInterval(function () {
     if (secs === 59) {
       secs = "0" + 0;
       seconds.textContent = secs;
