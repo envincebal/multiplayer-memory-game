@@ -16,6 +16,7 @@ body {
   max-width: 1110px;
   margin: 0 auto;
   background-color: #FCFCFC;
+  height: 100%;
 }
 
 .btn {
@@ -120,6 +121,7 @@ body {
 .restart-btn {
   width: 127px;
   background: #FDA214;
+  margin-right: 10px;
 }
 
 .restart-btn:hover {
@@ -185,8 +187,6 @@ body {
   background: #FDA214;
 }
 
-
-
 /* Players Score */
 
 .players-score {
@@ -195,7 +195,9 @@ body {
   margin: 50px 0;
 }
 
-.player {
+.player,
+.time-div,
+.moves-div {
   width: 20%;
   background: #DFE7EC;
   color: #304859;
@@ -225,11 +227,100 @@ body {
   justify-content: space-around;
 }
 
-.time-div,
-.moves-div {
-  width: 30%;
+.time-div {
+  display: flex;
 }
 
-.time-div{
+/* Single player modal */
+
+.single-result-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .4588235294117647);
+}
+
+.result-container {
+  max-width: 654px;
+  background-color: #fcfcfc;
+  padding: 40px 55px;
+  border-radius: 10px;
+  width: 85%;
+}
+
+.result-container h1,
+.result-container p {
+  text-align: center;
+}
+
+.result-container h1 {
+  color: #304859;
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.result-container {
+  color: #7191A5;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.result-subtitle {
+  margin-bottom: 30px;
+}
+
+.time-container,
+.moves-container,
+.button-container {
+  align-items: center;
   display: flex;
+  justify-content:space-between;
+}
+
+.time-container,
+.moves-container {
+  background-color: #DFE7EC;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.moves-result,
+.time-result{
+  font-weight: 700;
+  font-size: 32px; 
+  color: #304859;
+}
+
+.button-container {
+  margin-top: 30px; 
+}
+
+.restart,
+.new-game {
+  font-size: 20px;
+  width: 48%;
+}
+
+.restart {
+  background: #FDA214;
+}
+
+.restart:hover {
+  background: #FFB84A;
+}
+
+.new-game {
+  background-color: #DFE7EC;
+  color: #304859;
+}
+
+.new-game:hover {
+  background: #6395B8;
+  color: #FCFCFC;
 }

@@ -22,7 +22,9 @@
             fill="#152938" fill-rule="nonzero" /></svg>
         <div class="menu-buttons">
           <button class="btn restart-btn">Restart</button>
-          <button class="btn new-game-btn">New Game </button>
+          <a href="./index.html">
+            <button class="btn new-game-btn">New Game</button>
+          </a>
         </div>
 
       </div>
@@ -213,14 +215,52 @@
 
       <div class="players-container">
         <ul class="players-list">
-          <li class="player time-div">
+          <li class="time-div">
             <h3>Time</h3>
             <p class="timer"><span class="minutes">0</span>:<span class="seconds">00</span></p>
           </li>
+          <li class="moves-div">
+            <h3>Moves</h3>
+            <p class="moves">0</p>
+          </li>
         </ul>
       </div>
-    </div>
 
+    </div>
+    <div class="single-result-modal">
+      <div class="result-container">
+        <h1>You did it!</h1>
+        <p class="result-subtitle">Game over! Here's how you did:</p>
+        <div class="time-container">
+          <p>Time Elapsed</p>
+          <p class="time-result"></p>
+        </div>
+        <div class="moves-container">
+          <p>Moves Taken</p>
+          <p class="moves-result"></p>
+        </div>
+        <div class="button-container">
+          <button class="btn restart">Restart</button>
+          <a href="./index.html">
+            <button class="btn new-game">New Game</button>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <!-- <div class="multiplayer-result-modal">
+      <h1 class="multiplayer-result">You did it!</h1>
+      <p>Game over! Here's how you did:</p>
+      <ul class="player-results">
+
+      </ul>
+      <div class="button-container">
+        <button class="restart">Restart</button>
+        <a href="./index.html">
+          <button class="new-game">New Game</button>
+        </a>
+      </div>
+    </div> -->
   </div>
   <script type="module" src="./js/game.js"></script>
 </body>

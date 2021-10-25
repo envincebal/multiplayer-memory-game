@@ -22,7 +22,6 @@ Array.from(theme).forEach(el => {
 });
 
 
-
 Array.from(playerNum).forEach(el => {
   el.addEventListener("click", (e) => {
     const selected = document.getElementsByClassName("players-active");
