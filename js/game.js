@@ -35,7 +35,6 @@ function init() {
 
   })
 
-
   for (let i = 1; i <= players; i++) {
     addPlayer([i]);
   }
@@ -101,8 +100,6 @@ function cardEventListener(e) {
     } else {
       matches++
 
-
-
       /* If pair of card DO match, the 'match' style is applied to both. */
       setTimeout(() => {
         turn1.parentElement.classList.add("match");
@@ -117,9 +114,26 @@ function cardEventListener(e) {
       }
 
     }
+
     if (players <= 1 && grid === "4x4" && matches === 8) {
       singlePlayerResult(moves.textContent);
       document.querySelector(".single-result-modal").style.display = "flex";
+    } else if (players <= 1 && grid === "6x6" && matches === 18) {
+      singlePlayerResult(moves.textContent);
+      document.querySelector(".single-result-modal").style.display = "flex";
+    }
+
+    if (players > 1 && grid === "4x4" && matches === 8) {
+      document.querySelector(".multiplayer-result-modal").style.display = "flex";
+      for (let i = 0; i < players; i++) {
+        multiplayerResult([i]);
+      }
+
+    } else if (players > 1 && grid === "6x6" && matches === 18) {
+      document.querySelector(".multiplayer-result-modal").style.display = "flex";
+      for (let i = 0; i < players; i++) {
+        multiplayerResult([i]);
+      }
     }
 
   }
@@ -140,38 +154,6 @@ function cardEventListener(e) {
     }
   }
 
-}
-
-function addPlayer(num) {
-  const timer = document.querySelector(".time-div");
-  const moves = document.querySelector(".moves-div");
-  const playerList = document.querySelector(".players-list");
-  const listItem = document.createElement("li");
-  const playerHeader = document.createElement("h3");
-  const playerScore = document.createElement("p");
-
-  if (players > 1) {
-    moves.style.display = "none";
-    timer.style.display = "none";
-    playerHeader.innerText = "Player " + num;
-    playerScore.innerText = 0;
-    listItem.classList.add("player");
-    listItem.classList.add("moves-div");
-    playerScore.classList.add("score");
-    playerList.appendChild(listItem);
-    listItem.appendChild(playerHeader);
-    listItem.appendChild(playerScore);
-
-  } else {
-    startTimer();
-  }
-
-  const player =
-    Array.from(document.querySelectorAll(".player"));
-
-  if (players > 1) {
-    player[0].classList.add("player-turn");
-  }
 }
 
 function shuffle(array) {
@@ -211,7 +193,58 @@ function startTimer() {
       minutes.textContent = mins;
     }
   }, 1000);
+}
 
+function addPlayer(num) {
+  const timer = document.querySelector(".time-div");
+  const moves = document.querySelector(".moves-div");
+  const playerList = document.querySelector(".players-list");
+  const listItem = document.createElement("li");
+  const playerHeader = document.createElement("h3");
+  const playerScore = document.createElement("p");
+
+  if (players > 1) {
+    moves.style.display = "none";
+    timer.style.display = "none";
+    playerHeader.innerText = "Player " + num;
+    playerScore.innerText = 0;
+    listItem.classList.add("player");
+    listItem.classList.add("moves-div");
+    playerScore.classList.add("score");
+    playerList.appendChild(listItem);
+    listItem.appendChild(playerHeader);
+    listItem.appendChild(playerScore);
+
+  } else {
+    startTimer();
+  }
+
+  const player =
+    Array.from(document.querySelectorAll(".player"));
+
+  if (players > 1) {
+    player[0].classList.add("player-turn");
+  }
+}
+
+function multiplayerResult(num) {
+  const multiplayerResult = document.querySelector(".multiplayer-result");
+  const playerList = document.querySelector(".player-results");
+  const score = Array.from(document.querySelectorAll(".score"));
+
+  const listItem = document.createElement("li");
+  const playerName = document.createElement("p");
+  const playerScore = document.createElement("p");
+
+  playerName.innerText = `Player ${parseInt(num) + 1}`;
+  playerScore.innerText = score[num].textContent;
+
+  listItem.classList.add("player-container");
+  playerName.classList.add("player-name");
+  playerScore.classList.add("player-score");
+  playerList.appendChild(listItem);
+  listItem.appendChild(playerName);
+  listItem.appendChild(playerScore);
 }
 
 function singlePlayerResult(moves) {
@@ -223,8 +256,4 @@ function singlePlayerResult(moves) {
   finalMoves.textContent = moves;
 
   clearInterval(timer);
-}
-
-function multiplayerResult(time, moves) {
-
 }

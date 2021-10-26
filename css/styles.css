@@ -244,6 +244,17 @@ body {
   justify-content: center;
   background-color: rgba(0, 0, 0, .4588235294117647);
 }
+.multiplayer-result-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  display: none; 
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .4588235294117647);
+}
 
 .result-container {
   max-width: 654px;
@@ -276,14 +287,16 @@ body {
 
 .time-container,
 .moves-container,
-.button-container {
+.button-container,
+.player-container {
   align-items: center;
   display: flex;
   justify-content:space-between;
 }
 
 .time-container,
-.moves-container {
+.moves-container,
+.player-container {
   background-color: #DFE7EC;
   padding: 20px;
   margin-bottom: 20px;
@@ -291,7 +304,8 @@ body {
 }
 
 .moves-result,
-.time-result{
+.time-result,
+.player-score {
   font-weight: 700;
   font-size: 32px; 
   color: #304859;
