@@ -11,7 +11,6 @@ body {
   font-family: 'Atkinson Hyperlegible', sans-serif;
 }
 
-
 .game-container {
   max-width: 1110px;
   margin: 0 auto;
@@ -158,8 +157,22 @@ body {
 .card-button {
   cursor: pointer;
   border-style: none;
-  width: 82px;
-  height: 82px;
+  width: 118px;
+  height: 118px;
+  background: #304859;
+  border-radius: 100%;
+  align-items: center;
+  margin: 6px;
+  font-size: 0px;
+  font-weight: 700;
+  color: #fcfcfc;
+}
+
+.hard-card-button{
+  cursor: pointer;
+  border-style: none;
+  width: 81px;
+  height: 81px;
   background: #304859;
   border-radius: 100%;
   align-items: center;
@@ -198,7 +211,31 @@ body {
 .player,
 .time-div,
 .moves-div {
-  width: 20%;
+  width: 46%; 
+  background: #DFE7EC;
+  color: #304859;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  align-items: center;
+}
+
+.three-players{
+  width: 30%;
+  background: #DFE7EC;
+  color: #304859;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  align-items: center;
+}
+
+.four-players{
+  width: 46%;
   background: #DFE7EC;
   color: #304859;
   border-radius: 5px;
@@ -303,6 +340,11 @@ body {
   border-radius: 10px;
 }
 
+.winner{
+  color: #FCFCFC;
+  background-color: #304859;
+}
+
 .moves-result,
 .time-result,
 .player-score {
@@ -338,3 +380,4 @@ body {
   background: #6395B8;
   color: #FCFCFC;
 }
+

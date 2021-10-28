@@ -38,22 +38,3 @@ export let iconsArray = [
 ];
 
 export let numArray = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18];
-
-export let playersArray = [
-  `<li class="player moves-div">
-<h3>Player 1</h3>
-<p class="moves">0</p>
-</li>`,
-  `<li class="player moves-div">
-<h3>Player 2</h3>
-<p class="moves">0</p>
-</li>`,
-  `<li class="player moves-div">
-<h3>Player 3</h3>
-<p class="moves">0</p>
-</li>`,
-  `<li class="player moves-div">
-<h3>Player 4</h3>
-<p class="moves">0</p>
-</li>`
-]

@@ -7,37 +7,25 @@ const theme = localStorage.getItem("theme");
 const players = localStorage.getItem("players");
 const grid = localStorage.getItem("grid");
 
-let numMode = grid === "4x4" ? numArray.slice(0, 16) : numArray;
-let iconsMode = grid === "4x4" ? iconsArray.slice(0, 16) : iconsArray;
-let themeSetting = theme === "icons" ? iconsMode : numMode;
-const random = shuffle(themeSetting); // Stores shuffle function with array of card as argument.
 const cardButton = document.querySelectorAll(".card-button");
-const moves = document.querySelector(".moves");
+
 let timer;
 let turn = [];
 let currentPlayer = 0;
 let movesCounter = 0;
 let matches = 0;
+let finalScores = [];
+let winner;
 
 init();
-
+console.log(players)
 function init() {
+  let numMode = grid === "4x4" ? numArray.slice(0, 16) : numArray;
+  let iconsMode = grid === "4x4" ? iconsArray.slice(0, 16) : iconsArray;
+  let themeSetting = theme === "icons" ? iconsMode : numMode;
+  const random = shuffle(themeSetting); // Stores shuffle function with array of card as argument.
   const card = document.querySelectorAll(".card");
 
-  cardButton.forEach((icon, i) => {
-    const number = `<p class=${random[i]}>${random[i]}</p>`;
-
-    if (themeSetting !== "icons") {
-      icon.innerHTML = number;
-    } else {
-      icon.innerHTML = random[i];
-    }
-
-  })
-
-  for (let i = 1; i <= players; i++) {
-    addPlayer([i]);
-  }
 
   if (grid === "4x4") {
     Array.from(card).forEach(item => {
@@ -45,22 +33,43 @@ function init() {
         item.style.display = "none";
       }
     })
+  }
 
-    Array.from(cardButton).forEach(item => {
-      item.style.width = "118px";
-      item.style.height = "118px";
+  if (grid === "6x6") {
+    cardButton.forEach(item => {
+      item.classList.remove("card-button")
+      item.classList.add("hard-card-button")
     });
   }
+
+  cardButton.forEach((icon, i) => {
+    const number = `<p class=${random[i]}>${random[i]}</p>`;
+
+    if (theme !== "icons") {
+      icon.innerHTML = number;
+    } else {
+      icon.innerHTML = random[i];
+    }
+  });
+
+
+  for (let i = 1; i <= players; i++) {
+    addPlayer([i]);
+  }
+
+
 
   Array.from(cardButton).forEach(el => {
     el.addEventListener("click", cardEventListener);
   });
 }
 
+
+
 function cardEventListener(e) {
+  const moves = document.querySelector(".moves");
   const player = Array.from(document.querySelectorAll(".player"));
   const score = Array.from(document.querySelectorAll(".score"));
-
 
   if (!e.target.classList.contains("show")) {
     e.target.classList.add("open", "show");
@@ -112,7 +121,6 @@ function cardEventListener(e) {
       if (players > 1) {
         score[currentPlayer].textContent++;
       }
-
     }
 
     if (players <= 1 && grid === "4x4" && matches === 8) {
@@ -124,13 +132,30 @@ function cardEventListener(e) {
     }
 
     if (players > 1 && grid === "4x4" && matches === 8) {
+
       document.querySelector(".multiplayer-result-modal").style.display = "flex";
+
+      score.forEach(item => {
+        finalScores.push(parseInt(item.textContent));
+      });
+
+      winner = Math.max(...finalScores);
+
       for (let i = 0; i < players; i++) {
         multiplayerResult([i]);
       }
 
+
+
     } else if (players > 1 && grid === "6x6" && matches === 18) {
       document.querySelector(".multiplayer-result-modal").style.display = "flex";
+
+      score.forEach(item => {
+        finalScores.push(parseInt(item.textContent));
+      });
+
+      winner = Math.max(...finalScores);
+
       for (let i = 0; i < players; i++) {
         multiplayerResult([i]);
       }
@@ -153,7 +178,6 @@ function cardEventListener(e) {
       player[currentPlayer].classList.add("player-turn");
     }
   }
-
 }
 
 function shuffle(array) {
@@ -219,6 +243,10 @@ function addPlayer(num) {
     startTimer();
   }
 
+  if(players === 3){
+    listItem.classList.remove("player"); 
+  }
+
   const player =
     Array.from(document.querySelectorAll(".player"));
 
@@ -228,6 +256,7 @@ function addPlayer(num) {
 }
 
 function multiplayerResult(num) {
+
   const multiplayerResult = document.querySelector(".multiplayer-result");
   const playerList = document.querySelector(".player-results");
   const score = Array.from(document.querySelectorAll(".score"));
@@ -239,6 +268,16 @@ function multiplayerResult(num) {
   playerName.innerText = `Player ${parseInt(num) + 1}`;
   playerScore.innerText = score[num].textContent;
 
+  if (winner === parseInt(score[num].textContent)) {
+    listItem.classList.add("winner");
+    playerScore.style.color = "#FCFCFC";
+
+    if (new Set(finalScores).size !== finalScores.length) {
+      multiplayerResult.innerText = "It's a tie!";
+    } else {
+      multiplayerResult.innerText = `Player ${parseInt(num) + 1} wins!`;
+    }
+  }
   listItem.classList.add("player-container");
   playerName.classList.add("player-name");
   playerScore.classList.add("player-score");
