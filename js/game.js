@@ -13,12 +13,12 @@ let timer;
 let turn = [];
 let currentPlayer = 0;
 let movesCounter = 0;
-let matches = 0;
+let matches = 8;
 let finalScores = [];
 let winner;
 
 init();
-console.log(players)
+
 function init() {
   let numMode = grid === "4x4" ? numArray.slice(0, 16) : numArray;
   let iconsMode = grid === "4x4" ? iconsArray.slice(0, 16) : iconsArray;
@@ -28,7 +28,7 @@ function init() {
 
 
   if (grid === "4x4") {
-    Array.from(card).forEach(item => {
+    card.forEach(item => {
       if (item.classList.contains("hard-card")) {
         item.style.display = "none";
       }
@@ -57,9 +57,17 @@ function init() {
     addPlayer([i]);
   }
 
+  if (document.querySelectorAll(".player").length === 3) { 
+    document.querySelectorAll(".player").forEach(item => {
+      item.style.width = "30%";
+    });
+  }else if(document.querySelectorAll(".player").length === 4){
+    document.querySelectorAll(".player").forEach(item => {
+      item.style.width = "23%";
+    });
+  }
 
-
-  Array.from(cardButton).forEach(el => {
+  cardButton.forEach(el => {
     el.addEventListener("click", cardEventListener);
   });
 }
@@ -68,8 +76,8 @@ function init() {
 
 function cardEventListener(e) {
   const moves = document.querySelector(".moves");
-  const player = Array.from(document.querySelectorAll(".player"));
-  const score = Array.from(document.querySelectorAll(".score"));
+  const player = document.querySelectorAll(".player");
+  const score = document.querySelectorAll(".score");
 
   if (!e.target.classList.contains("show")) {
     e.target.classList.add("open", "show");
@@ -145,8 +153,6 @@ function cardEventListener(e) {
         multiplayerResult([i]);
       }
 
-
-
     } else if (players > 1 && grid === "6x6" && matches === 18) {
       document.querySelector(".multiplayer-result-modal").style.display = "flex";
 
@@ -158,7 +164,7 @@ function cardEventListener(e) {
 
       for (let i = 0; i < players; i++) {
         multiplayerResult([i]);
-      }
+      }  
     }
 
   }
@@ -226,7 +232,7 @@ function addPlayer(num) {
   const listItem = document.createElement("li");
   const playerHeader = document.createElement("h3");
   const playerScore = document.createElement("p");
-
+  const movesDiv = Array.from(document.querySelector(".moves-div"));
   if (players > 1) {
     moves.style.display = "none";
     timer.style.display = "none";
@@ -243,16 +249,14 @@ function addPlayer(num) {
     startTimer();
   }
 
-  if(players === 3){
-    listItem.classList.remove("player"); 
-  }
-
   const player =
     Array.from(document.querySelectorAll(".player"));
 
   if (players > 1) {
     player[0].classList.add("player-turn");
   }
+
+
 }
 
 function multiplayerResult(num) {
@@ -264,6 +268,8 @@ function multiplayerResult(num) {
   const listItem = document.createElement("li");
   const playerName = document.createElement("p");
   const playerScore = document.createElement("p");
+  const duplicates = finalScores.filter((item, index) => finalScores.indexOf(item) !== index);
+  const highestScore = Math.max(...finalScores)
 
   playerName.innerText = `Player ${parseInt(num) + 1}`;
   playerScore.innerText = score[num].textContent;
@@ -272,12 +278,13 @@ function multiplayerResult(num) {
     listItem.classList.add("winner");
     playerScore.style.color = "#FCFCFC";
 
-    if (new Set(finalScores).size !== finalScores.length) {
+    if (highestScore === Math.max(...duplicates)) {
       multiplayerResult.innerText = "It's a tie!";
     } else {
       multiplayerResult.innerText = `Player ${parseInt(num) + 1} wins!`;
     }
   }
+
   listItem.classList.add("player-container");
   playerName.classList.add("player-name");
   playerScore.classList.add("player-score");

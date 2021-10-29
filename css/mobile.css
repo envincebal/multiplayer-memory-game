@@ -6,6 +6,48 @@
   }
 }
 
+@media(max-width: 768px) {
+  .result-container {
+    padding: 30px 25px;
+  }
+
+  .result-container h1 {
+    font-size: 25px;
+  }
+
+  .result-subtitle {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .player-container {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+
+  .player-score{
+    font-size: 22px;
+  }
+
+  .button-container {
+    margin-top: 15px;
+    display: block;
+  }
+
+  .restart,
+  .new-game {
+    font-size: 16px;
+    padding: 15px;
+    width: 100%;
+  }
+
+  .restart {
+    margin-bottom: 10px;
+  }
+}
+
 @media(max-width: 670px) {
 
   .card-button {
@@ -15,11 +57,11 @@
 }
 
 
-@media(max-width: 565px) { 
-.hard-card-button{
-  width: 69px;
-  height: 69px;
-}
+@media(max-width: 565px) {
+  .hard-card-button {
+    width: 69px;
+    height: 69px;
+  }
 }
 
 @media(max-width: 550px) {
@@ -27,7 +69,8 @@
     text-align: center;
     display: block;
   }
-  .menu-buttons{
+
+  .menu-buttons {
     margin-top: 10px;
   }
 }
@@ -80,4 +123,3 @@
     height: 70px;
   }
 }
-

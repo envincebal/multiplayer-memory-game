@@ -131,7 +131,6 @@ body {
   width: 149px;
   color: #304859;
   background: #DFE7EC;
-
 }
 
 .new-game-btn:hover {
@@ -205,7 +204,7 @@ body {
 .players-score {
   display: flex;
   justify-content: space-evenly;
-  margin: 50px 0;
+  margin-top: 50px; 
 }
 
 .player,
@@ -371,13 +370,23 @@ body {
   background: #FFB84A;
 }
 
-.new-game {
+.button-container a {
+  width: 48%;
+  border-radius: 35px; 
+}
+
+.new-game{
+  width: 100%;
   background-color: #DFE7EC;
   color: #304859;
 }
 
 .new-game:hover {
-  background: #6395B8;
+  background-color: #6395B8;
+  color: #FCFCFC;
+}
+
+.new-game a:hover {
   color: #FCFCFC;
 }
 
