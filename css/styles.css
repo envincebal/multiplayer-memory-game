@@ -7,7 +7,6 @@
 }
 
 body {
-
   font-family: 'Atkinson Hyperlegible', sans-serif;
 }
 
@@ -112,6 +111,10 @@ body {
   align-items: center;
 }
 
+.menu-buttons{
+  display: flex;
+}
+
 .menu-buttons .btn {
   font-size: 20px;
   font-weight: 700;
@@ -211,30 +214,6 @@ body {
 .time-div,
 .moves-div {
   width: 46%; 
-  background: #DFE7EC;
-  color: #304859;
-  border-radius: 5px;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 15px;
-  align-items: center;
-}
-
-.three-players{
-  width: 30%;
-  background: #DFE7EC;
-  color: #304859;
-  border-radius: 5px;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 15px;
-  align-items: center;
-}
-
-.four-players{
-  width: 46%;
   background: #DFE7EC;
   color: #304859;
   border-radius: 5px;
@@ -356,8 +335,8 @@ body {
   margin-top: 30px; 
 }
 
-.restart,
-.new-game {
+.result-restart,
+.new-game-link { 
   font-size: 20px;
   width: 48%;
 }
@@ -370,12 +349,13 @@ body {
   background: #FFB84A;
 }
 
-.button-container a {
-  width: 48%;
+.new-game-link {
+
   border-radius: 35px; 
 }
 
 .new-game{
+  font-size: 20px;
   width: 100%;
   background-color: #DFE7EC;
   color: #304859;

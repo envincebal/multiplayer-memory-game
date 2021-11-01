@@ -13,19 +13,21 @@ let timer;
 let turn = [];
 let currentPlayer = 0;
 let movesCounter = 0;
-let matches = 8;
+let matches = 0;
 let finalScores = [];
 let winner;
+
+
 
 init();
 
 function init() {
+  const card = document.querySelectorAll(".card");
+
   let numMode = grid === "4x4" ? numArray.slice(0, 16) : numArray;
   let iconsMode = grid === "4x4" ? iconsArray.slice(0, 16) : iconsArray;
   let themeSetting = theme === "icons" ? iconsMode : numMode;
-  const random = shuffle(themeSetting); // Stores shuffle function with array of card as argument.
-  const card = document.querySelectorAll(".card");
-
+  const random = shuffle(themeSetting);
 
   if (grid === "4x4") {
     card.forEach(item => {
@@ -42,6 +44,20 @@ function init() {
     });
   }
 
+  for (let i = 1; i <= players; i++) {
+    addPlayer([i]);
+  }
+
+  if (document.querySelectorAll(".player").length === 3) {
+    document.querySelectorAll(".player").forEach(item => {
+      item.style.width = "30%";
+    });
+  } else if (document.querySelectorAll(".player").length === 4) {
+    document.querySelectorAll(".player").forEach(item => {
+      item.style.width = "23%";
+    });
+  }
+
   cardButton.forEach((icon, i) => {
     const number = `<p class=${random[i]}>${random[i]}</p>`;
 
@@ -52,27 +68,70 @@ function init() {
     }
   });
 
+  restartGame();
 
-  for (let i = 1; i <= players; i++) {
-    addPlayer([i]);
-  }
-
-  if (document.querySelectorAll(".player").length === 3) { 
-    document.querySelectorAll(".player").forEach(item => {
-      item.style.width = "30%";
-    });
-  }else if(document.querySelectorAll(".player").length === 4){
-    document.querySelectorAll(".player").forEach(item => {
-      item.style.width = "23%";
-    });
-  }
-
-  cardButton.forEach(el => {
-    el.addEventListener("click", cardEventListener);
-  });
 }
 
+function restartGame() {
+  const cards = Array.from(document.querySelectorAll(".card"));
+  const random = shuffle(cards);
+  const playerTurn =
+    document.querySelectorAll(".player");
+  const playerContainer = document.querySelectorAll(".player-container");
+  const restartBtn = document.querySelectorAll(".restart");
+  const gridList = document.querySelector(".grid");
+  const moves = document.querySelector(".moves");
+  const scores = document.querySelectorAll(".score");
+  const singlePlayerModal = document.querySelector(".single-result-modal");
+  const multiPlayerModal = document.querySelector(".multiplayer-result-modal");
 
+  turn = [];
+  currentPlayer = 0;
+  movesCounter = 0;
+  matches = 0;
+  finalScores = [];
+  winner;
+
+  moves.innerText = 0;
+
+  singlePlayerModal.style.display = "none";
+  multiPlayerModal.style.display = "none";
+
+  playerContainer.forEach(el => {
+    el.remove();
+  })
+
+  scores.forEach(score => {
+    score.textContent = 0;
+  });
+
+  random.forEach(card => {
+    gridList.append(card);
+  });
+
+  cardButton.forEach(card => {
+    card.classList.remove("open", "show", "match");
+    card.addEventListener("click", cardEventListener);
+  });
+
+  restartBtn.forEach(el => {
+    el.addEventListener("click", () => {
+      restartGame();
+      clearInterval(timer);
+      startTimer();
+      document.querySelector(".minutes").textContent = "0";
+      document.querySelector(".seconds").textContent = "00";
+    });
+  });
+
+  playerTurn.forEach(el => {
+    el.classList.remove("player-turn");
+  })
+
+  if (players > 1) {
+    playerTurn[0].classList.add("player-turn");
+  }
+}
 
 function cardEventListener(e) {
   const moves = document.querySelector(".moves");
@@ -131,6 +190,11 @@ function cardEventListener(e) {
       }
     }
 
+    if (players <= 1 && turn.length === 2) {
+      movesCounter++;
+      moves.textContent = movesCounter;
+    }
+
     if (players <= 1 && grid === "4x4" && matches === 8) {
       singlePlayerResult(moves.textContent);
       document.querySelector(".single-result-modal").style.display = "flex";
@@ -164,14 +228,9 @@ function cardEventListener(e) {
 
       for (let i = 0; i < players; i++) {
         multiplayerResult([i]);
-      }  
+      }
     }
 
-  }
-
-  if (players <= 1 && turn.length === 2) {
-    movesCounter++;
-    moves.textContent = movesCounter;
   }
 
   if (turn.length === 2 && players > 1) {
@@ -227,42 +286,32 @@ function startTimer() {
 
 function addPlayer(num) {
   const timer = document.querySelector(".time-div");
-  const moves = document.querySelector(".moves-div");
   const playerList = document.querySelector(".players-list");
+  const movesDiv = document.querySelector(".moves-div");
   const listItem = document.createElement("li");
   const playerHeader = document.createElement("h3");
   const playerScore = document.createElement("p");
-  const movesDiv = Array.from(document.querySelector(".moves-div"));
+
   if (players > 1) {
-    moves.style.display = "none";
+    movesDiv.style.display = "none";
     timer.style.display = "none";
-    playerHeader.innerText = "Player " + num;
+    playerHeader.innerText = "P" + num;
     playerScore.innerText = 0;
     listItem.classList.add("player");
-    listItem.classList.add("moves-div");
     playerScore.classList.add("score");
     playerList.appendChild(listItem);
     listItem.appendChild(playerHeader);
     listItem.appendChild(playerScore);
-
   } else {
     startTimer();
   }
-
-  const player =
-    Array.from(document.querySelectorAll(".player"));
-
-  if (players > 1) {
-    player[0].classList.add("player-turn");
-  }
-
-
 }
 
 function multiplayerResult(num) {
 
   const multiplayerResult = document.querySelector(".multiplayer-result");
   const playerList = document.querySelector(".player-results");
+  const player = document.querySelectorAll(".player-container");
   const score = Array.from(document.querySelectorAll(".score"));
 
   const listItem = document.createElement("li");
@@ -285,21 +334,25 @@ function multiplayerResult(num) {
     }
   }
 
-  listItem.classList.add("player-container");
-  playerName.classList.add("player-name");
-  playerScore.classList.add("player-score");
-  playerList.appendChild(listItem);
-  listItem.appendChild(playerName);
-  listItem.appendChild(playerScore);
+  if (player.length < players) {
+    listItem.classList.add("player-container");
+    playerName.classList.add("player-name");
+    playerScore.classList.add("player-score");
+    playerList.appendChild(listItem);
+    listItem.appendChild(playerName);
+    listItem.appendChild(playerScore);
+  }
+
 }
 
 function singlePlayerResult(moves) {
   const finalTime = document.querySelector(".time-result");
   const finalMoves = document.querySelector(".moves-result");
   const time = document.querySelector(".timer");
+  const movesCount = document.querySelector(".moves");
 
   finalTime.textContent = time.textContent;
-  finalMoves.textContent = moves;
+  finalMoves.textContent = movesCount.textContent;
 
   clearInterval(timer);
 }
