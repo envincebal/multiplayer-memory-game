@@ -8,12 +8,12 @@
 
 body {
   font-family: 'Atkinson Hyperlegible', sans-serif;
+  background-color: #FCFCFC;  
 }
 
 .game-container {
   max-width: 1110px;
   margin: 0 auto;
-  background-color: #FCFCFC;
   height: 100%;
 }
 
